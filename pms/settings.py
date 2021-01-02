@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'welcome',
+    'product',
+    'store',
+    'material'
 ]
 
 MIDDLEWARE = [
@@ -77,7 +80,7 @@ WSGI_APPLICATION = 'pms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_mysql',
+        'NAME': 'db',
         'USER': 'root',
         'PASSWORD': 'psJe8jbImJ3Jc1Dk',
         'HOST': '34.80.81.209',
