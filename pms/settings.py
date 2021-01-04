@@ -13,17 +13,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-# import environ
-
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# env_file = os.path.join(BASE_DIR,  ".env")
+env_file = os.path.join(BASE_DIR,  ".env")
 
-# env = environ.Env()
-# env.read_env(env_file)
+env = environ.Env()
+env.read_env(env_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -33,9 +32,9 @@ SECRET_KEY = '_$!)x*+i*r=igr1ynz+na81_2drf_tqvqubxh#n4n-8)z4d6pr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 try:
-    DEBUG = os.environ["DEBUG"]
+    DEBUG = env('DEBUG')
 except:
-    print("cant get os.environ[DEBUG]")
+    print("cant get env")
     DEBUG = True
 
 
@@ -139,7 +138,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+try:
+    DEBUG = env('DEBUG')
+    print('DEBUG env', DEBUG)
+    STATIC_URL = '/static/'
+except:
+    print("cant get env")
+    DEBUG = True
+    STATIC_URL = '/static/'
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')

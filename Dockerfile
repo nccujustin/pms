@@ -28,6 +28,7 @@ ENV PORT 8000
 ENV PYTHONUNBUFFERED TRUE
 
 RUN python manage.py collectstatic --noinput
+
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
 # For environments with multiple CPU cores, increase the number of workers
