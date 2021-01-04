@@ -1,0 +1,36 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1>商品存貨</h1>
+
+<div class="mt-6 mb-6">
+  <button type="button" class="btn btn-primary">新增</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">商品編號</th>
+      <th scope="col">商品名稱</th>
+      <th scope="col">目前存量</th>
+      <th scope="col">設定</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for inventory in inventoryList %}
+    <!-- productInventoryId -->
+    <tr>
+      <td>{{ inventory.id }}</td>
+      <td>{{ inventory.name}}</td>
+      <td>{{ inventory.currentAmount }}</td>
+      <td>
+        <button type="button" class="btn btn-warning">修改</button>
+        <button type="button" class="btn btn-danger">刪除</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

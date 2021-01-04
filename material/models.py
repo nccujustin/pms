@@ -20,6 +20,9 @@ class Inventory(models.Model):
     currentAmount = models.IntegerField()
     creDate = models.DateTimeField(auto_now_add=True, blank=True)
 
+    def __str__(self):
+  	    return self.name
+
 # 原物料訂單細目
 class OrderDetails(models.Model):
     weight = models.IntegerField()

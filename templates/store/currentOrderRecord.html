@@ -1,0 +1,45 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1 class="mb-3">商品現有訂單</h1>
+
+<div class="mt-6 mb-6">
+  <button type="button" class="btn btn-primary">新增</button>
+</div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">訂單編號</th>
+      <th scope="col">商店</th>
+      <th scope="col">總額</th>
+      <th scope="col">總數</th>
+      <th scope="col">訂單日期</th>
+      <th scope="col">出貨日期</th>
+      <th scope="col">訂單建立時間</th>
+      <th scope="col">設定</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orderList %}
+    <!-- productInventoryId -->
+    <tr>
+      <td>{{ order.id }}</td>
+      <td>{{ order.productOrderId.storeId}}</td>
+      <td>${% widthratio order.amount 1 order.price %}</td>
+      <td>{{ order.amount }}</td>
+      <td>{{ order.productOrderId.orderDate }}</td>
+      <td>{{ order.productOrderId.deliveryDate }}</td>
+      <td>{{ order.creDate }}</td>
+      <td>
+        <button type="button" class="btn btn-warning">修改</button>
+        <button type="button" class="btn btn-danger">刪除</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

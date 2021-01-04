@@ -11,23 +11,27 @@ class Store(models.Model):
 
 # 商品訂單
 class Order(models.Model):
+	id = models.AutoField(primary_key=True)
 	orderDate = models.DateField(auto_now=False, auto_now_add=False) # 訂單日期
 	deliveryDate = models.DateField(auto_now=False, auto_now_add=False) # 出貨日期
-	storeId = models.ForeignKey(Store,blank=True,null=True, on_delete=models.CASCADE) # order by which store
+	storeId = models.ForeignKey(Store,blank=True,null=True, on_delete=models.CASCADE, related_name='order_store') # order by which store
 	creDate = models.DateTimeField(auto_now_add=True, blank=True)
+
 	def __str__(self):
-  		return self.storeId
+  		return str(self.id)
 
 # 商品存貨
 class Inventory(models.Model):
+	id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length = 50) # 名稱
 	currentAmount = models.IntegerField() # 目前存量
 	creDate = models.DateTimeField(auto_now_add=True, blank=True)
 	def __str__(self):
-  		return self.name
+  		return str(self.id)
 
 # 商品訂單細目
 class OrderDetail(models.Model):
+	id = models.AutoField(primary_key=True)
 	amount = models.CharField(max_length = 10) # 數量
 	price = models.CharField(max_length = 20) # 價錢
 	EXP = models.DateField(auto_now=False, auto_now_add=False) # 保存期限 expiration date
@@ -35,7 +39,7 @@ class OrderDetail(models.Model):
 	productOrderId = models.ForeignKey(Order,blank=True, null=True, on_delete=models.CASCADE) # 商品訂單編號
 	creDate = models.DateTimeField(auto_now_add=True, blank=True)
 	def __str__(self):
-  		return self.productOrderId
+  		return str(self.id)
 	
 # RFM
 class RFM(models.Model):
