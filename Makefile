@@ -8,7 +8,7 @@ dev:
 createApp:
 	@python manage.py startapp ${appName}
 
-makemigrations--dry-run:
+makemigrations-dry-run:
 	@python manage.py makemigrations ${appName} --dry-run
 
 makemigrations:

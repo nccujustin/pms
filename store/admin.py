@@ -1,13 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Store
-from .models import Order as ProductOrder
-from .models import Inventory as ProductInventory
-from .models import OrderDetail as ProductOrderDetail
-from .models import RFM
-from .models import CAI
-from .models import LTV
+from .models import Store, Order as ProductOrder, Inventory as ProductInventory, OrderDetail as ProductOrderDetail, RFM, CAI, LTV
 
 
 admin.site.register(Store)

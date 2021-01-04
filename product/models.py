@@ -14,9 +14,15 @@ class Consume(models.Model):
 	costAmount = models.IntegerField() # 消耗原物料存貨量
 	creDate = models.DateTimeField(auto_now_add=True, blank=True)
 
+	def __str__(self):
+  		return self.productionId
+
 # 製造
 class Manufacture(models.Model):
 	productionId = models.ForeignKey(Production,null=True, on_delete=models.CASCADE)
 	productInventoryId = models.ForeignKey(ProductInventory,blank=True, null=True, on_delete=models.CASCADE)
 	amount = models.IntegerField()
 	creDate = models.DateTimeField(auto_now_add=True, blank=True)
+
+	def __str__(self):
+  		return self.productionId
