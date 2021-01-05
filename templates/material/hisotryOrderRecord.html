@@ -4,28 +4,25 @@
 
 <div class="background" style="overflow-y: scroll;">
   <p id="now">原物料訂單歷史紀錄</p>
-  <div class="function">
-    <button class="add" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-plus"></i> 新增</button>
-    <button class="delete" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-trash-alt"></i> 刪除</button>
-    <button class="revise" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-pencil-alt"></i> 修改</button>
-    <button class="save" type="button" onclick="location.href='網址放這裡'"> <i class="fas fa-save"></i> 儲存</button>
-  </div>
   <div class="record" style="overflow-y: scroll;">
     <table class="tablebody">
       <tr>
         <th>訂單編號</th>
-      <th>供應商</th>
-      <th>總額</th>
-      <th>總重(公斤)</th>
-      <th>訂單日期</th>
-      <th>進貨日期</th>
+        <th>供應商</th>
+        <th>總額</th>
+        <th>總重(公斤)</th>
+        <th>訂單日期</th>
+        <th>進貨日期</th>
 
       </tr>
-      {% for history in historyList %}
+      {% for order in historyList %}
       <tr>
-        <td>{{ history.id }}</td>
-        <td>{{ history.name}}</td>
-        <td>{{ history.currentAmount }}</td>
+        <td>{{ order.id }}</td>
+        <td>{{ order.materialOrderId.supplierId }}</td>
+        <td>${% widthratio order.amount 1 order.price %}</td>
+        <td>{{ order.weight }}</td>
+        <td>{{ order.materialOrderId.orderDate }}</td>
+        <td>{{ order.materialOrderId.purchaseDate }}</td>
       </tr>
       {% endfor %}
 
