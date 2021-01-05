@@ -22,8 +22,7 @@
         <th>出貨日期</th>
 
       </tr>
-      {% for order in orderList %}
-      <!-- productInventoryId -->
+      {% for order in historyList %}
       <tr>
         <td><input type="checkbox" name="select" style="width: 20px;height: 20px;"></td>
         <td>{{ order.id }}</td>
@@ -32,7 +31,6 @@
         <td>{{ order.amount }}</td>
         <td>{{ order.productOrderId.orderDate }}</td>
         <td>{{ order.productOrderId.deliveryDate }}</td>
-        <td>{{ order.creDate }}</td>
       </tr>
       {% endfor %}
 
