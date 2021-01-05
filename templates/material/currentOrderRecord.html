@@ -1,380 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"> </meta>
-    <title>原物料現有訂單</title>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script><link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<style>
-  .navbar {
-      overflow: hidden; /*當圖片ˋ握文字超出原本的範圍，會自動隱藏*/
-      background-color: white; /*背景顏色*/
-      border-bottom-style: solid;
-      border-color: rgb(220, 220, 220); /*上 又 下 左*/
+{% extends '../base.html' %}
 
+{% block content %}
 
-    }
-
-  .material-content a, .product-content a, .index-content a {
-      float:none; 
-      font-size: 26px;
-      color: black; /*字體顏色*/
-      padding:12px 16px; /*上下內距都是12px，左右都是16px */
-      text-decoration: none; /*移除超連結底線*/
-      display: block;
-      text-align: left; /*置中，水平對齊*/
-    }
-
-    .material, .product, .index {
-      float:none; 
-      overflow: hidden;
-      text-decoration: none; /*移除超連結底線*/     
-      display: inline-block;/*並排*/  
-      text-align: left; /*，靠左水平對齊*/
-    }
-
-    .materialbtn, .productbtn, .indexbtn {
-      font-size: 26px;  
-      border: none; /*邊框*/
-      outline: none; /*輪廓*/
-      color: block;
-      padding: 14px 16px; 
-      background-color: white;
-      font-family: inherit;
-      margin: 0;
-    }
-
-    .material:hover .materialbtn ,.product:hover .productbtn, .index:hover .indexbtn, .material-content a:hover , .product-content a:hover, .index-content a:hover {
-        background-color: rgb(0,128,0); /*滑鼠移到上方後的背景顏色*/
-        color: white; /*字的顏色*/
-    }
-
-    .material-content, .product-content, .index-content { /*隱藏次選單*/
-      background-color: white;
-      color: black;
-      display: none;
-      position: absolute; 
-      min-width:180px ; /*限制不能小於多少寬度 */
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /*框架陰影*/
-      z-index: 1;
-    }
-
-    .material:hover .material-content, .product:hover .product-content, .index:hover .index-content { /*滑鼠移到上方顯示選單*/
-      display: block;
-    }
-
-    .background {
-      background-color: white;
-      width: 1720px;
-      height: 700px;
-      background-repeat: no-repeat;
-      background-position: left top;
-      background-size: 1720px 690px;
-      /*border:2px #ccc solid;*/  
-      position:fixed;  
-   }
-
-   p#now{
-      font-weight: bold;
-      font-size: 30px;
-      text-align: left;
-
-   }
-
-    .add, .delete, .revise, .save {
-      font-size: 20px;  
-      border: none; /*邊框*/
-      outline: none; /*輪廓*/
-      color: white;
-      padding: 14px 16px; 
-      background-color: rgb(0, 128, 0);
-      font-family: inherit;
-      margin: 7px;
-      padding: 17px;
-  
-   }
-
-   .add:hover, .delete:hover, .revise:hover, .save:hover {
-    background-color: rgb(34, 139, 34); /*滑鼠移到上方後的背景顏色*/
-   }
-
-  .background {
-      text-align: left;
-      margin-left: 100px;
-   }
-
-  table, td,th {
-      text-align: bottom;
-      border: 1px solid black;
-      font-size: 20px;
-
-
-  }
-
-  table {    
-      border-collapse: collapse;
-      /*border: 1px solid #ddd; */
-      margin-top: 15px;
-  }
-
-
-  th, td {
-      width: 175px;
-      text-align: center;
-      padding:20px;
-  }
-
-   tr:nth-child(odd){/*奇數行底色是灰色*/
-      background-color: #f2f2f2;   
-
-  } 
-
-</style>
-</head>
-<body>
-
-<div class="navbar">
-  <a href="#"><img src="logo.png" width="150" height="80"></a>
-  <div class="material">
-    <button class="materialbtn">原物料訂單
-      <i class="fas fa-caret-down"></i>
-    </button>
-    <div class="material-content">
-      <a href="#">現有訂單</a>
-      <a href="#">歷史紀錄</a>
-      <a href="#">存貨</a>
-    </div>
-  </div><!--
---><div class="product">
-    <button class="productbtn">商品訂單
-      <i class="fas fa-caret-down"></i>
-    </button>
-    <div class="product-content">
-      <a href="#">現有訂單</a>
-      <a href="#">歷史紀錄</a>
-      <a href="#">存貨</a>
-    </div>
-  </div><!-- 
---><div class="index">
-    <button class="indexbtn">顧客分析
-      <i class="fas fa-caret-down"></i>
-    </button>
-    <div class="index-content">
-      <a href="#">RFM</a>
-      <a href="#">顧客活動指標</a>
-      <a href="#">顧客價值指標</a>
-    </div>
-  </div> 
-</div>
-<div class="background"  style="overflow-y: scroll;" >
+<div class="background" style="overflow-y: scroll;">
   <p id="now">原物料現有訂單</p>
-  <div class="function" >
-     <button class="add" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-plus"></i> 新增</button>
-     <button class="delete" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-trash-alt"></i> 刪除</button>
-     <button class="revise" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-pencil-alt"></i> 修改</button>
-     <button class="save" type="button" onclick="location.href='網址放這裡'"> <i class="fas fa-save"></i>   儲存</button>
+  <div class="function">
+    <button class="add" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-plus"></i> 新增</button>
+    <button class="delete" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-trash-alt"></i> 刪除</button>
+    <button class="revise" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-pencil-alt"></i> 修改</button>
+    <button class="save" type="button" onclick="location.href='網址放這裡'"> <i class="fas fa-save"></i> 儲存</button>
   </div>
   <div class="record" style="overflow-y: scroll;">
     <table class="tablebody">
-    <tr>
-      <th>選取</th>
-      <th>訂單編號</th>
-      <th>供應商</th>
-      <th>總額</th>
-      <th>總重(公斤)</th>
-      <th>訂單日期</th>
-      <th>進貨日期</th>
-      
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>
-        <input type="checkbox" name="select" style="width: 20px;height: 20px;" >
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+      <tr>
+        <th>選取</th>
+        <th>訂單編號</th>
+        <th>供應商</th>
+        <th>總額</th>
+        <th>總重(公斤)</th>
+        <th>訂單日期</th>
+        <th>進貨日期</th>
 
-    </table>  
-</div>
+      </tr>
+      {% for order in orderList %}
+      <tr>
+        <td><input type="checkbox" name="select" style="width: 20px;height: 20px;"></td>
+        <td>{{ order.id }}</td>
+        <td>{{ order.materialOrderId.supplierId }}</td>
+        <td>${% widthratio order.amount 1 order.price %}</td>
+        <td>{{ order.weight }}</td>
+        <td>{{ order.materialOrderId.orderDate }}</td>
+        <td>{{ order.materialOrderId.purchaseDate }}</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+  </div>
 </div>
 </body>
+
 </html>
+
+{% endblock %}

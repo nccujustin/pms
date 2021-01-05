@@ -1,36 +1,37 @@
 {% extends '../base.html' %}
 
 {% block content %}
-<h1>商品存貨</h1>
 
-<div class="mt-6 mb-6">
-  <button type="button" class="btn btn-primary">新增</button>
+<div class="background" style="overflow-y: scroll;">
+  <p id="now">商品存貨</p>
+  <div class="function">
+    <button class="add" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-plus"></i> 新增</button>
+    <button class="delete" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-trash-alt"></i> 刪除</button>
+    <button class="revise" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-pencil-alt"></i> 修改</button>
+    <button class="save" type="button" onclick="location.href='網址放這裡'"> <i class="fas fa-save"></i> 儲存</button>
+  </div>
+  <div class="record" style="overflow-y: scroll;">
+    <table class="tablebody">
+      <tr>
+        <th>商品編號</th>
+        <th>商品名稱</th>
+        <th>目前存量</th>
+
+      </tr>
+      {% for inventory in inventoryList %}
+      <tr>
+        <td>{{ inventory.id }}</td>
+        <td>{{ inventory.name}}</td>
+        <td>{{ inventory.currentAmount }}</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+  </div>
 </div>
+</body>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">商品編號</th>
-      <th scope="col">商品名稱</th>
-      <th scope="col">目前存量</th>
-      <th scope="col">設定</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for inventory in inventoryList %}
-    <!-- productInventoryId -->
-    <tr>
-      <td>{{ inventory.id }}</td>
-      <td>{{ inventory.name}}</td>
-      <td>{{ inventory.currentAmount }}</td>
-      <td>
-        <button type="button" class="btn btn-warning">修改</button>
-        <button type="button" class="btn btn-danger">刪除</button>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+</html>
 
 
 {% endblock %}
