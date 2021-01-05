@@ -31,12 +31,8 @@ env.read_env(env_file)
 SECRET_KEY = '_$!)x*+i*r=igr1ynz+na81_2drf_tqvqubxh#n4n-8)z4d6pr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-try:
-    DEBUG = env('DEBUG')
-except:
-    print("cant get env")
-    DEBUG = True
 
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -138,14 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-try:
-    DEBUG = env('DEBUG')
-    print('DEBUG env', DEBUG)
-    STATIC_URL = '/static/'
-except:
-    print("cant get env")
-    DEBUG = True
-    STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
