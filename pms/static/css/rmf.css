@@ -1,0 +1,15 @@
+.flex {
+  display: flex;
+}
+
+.content-down {
+  display: flex;
+}
+
+.content-table{
+  flex: 1;
+}
+
+.content-chart {
+flex: 2;
+}

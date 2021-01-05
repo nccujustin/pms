@@ -8,7 +8,7 @@
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <style>
-    .navbar {
+    .navbar-c {
       overflow: hidden;
       /*當圖片ˋ握文字超出原本的範圍，會自動隱藏*/
       background-color: white;
@@ -181,8 +181,11 @@
 
 <body>
 
-  <div class="navbar">
-    <a href="#"><img src="logo.png" width="150" height="80"></a>
+  <div class="navbar-c">
+    <a href="/">
+      {% load static %}
+      <img src="{% static 'images/logo.png' %}" width="150" height="80">
+    </a>
     <div class="material">
       <button class="materialbtn">原物料訂單
         <i class="fas fa-caret-down"></i>

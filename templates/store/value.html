@@ -1,11 +1,126 @@
-{% extends '../base.html' %}
+{% extends '../ben_base.html' %}
 
 {% block content %}
 
-<h1>value</h1>
-</body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/rmf.css' %}" />
+<div class="title">
+  <h1>顧客價值指標</h1>
+</div>
+<div class="content">
+  <div class="content-top">
+    <div class="form-floating mb-3">
+      <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+        <option selected>請選擇指標</option>
+        <option value="1">品類需求佔有率</option>
+        <option value="2">錢包佔有率</option>
+        <option value="3">錢包大小</option>
+        <option value="4">存續期間</option>
+        <option value="4">平均購買間隔時間</option>
+      </select>
+      <label for="floatingSelectGrid">指標</label>
+    </div>
+    <div class="row g-2 mb-3">
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>年</option>
+            <option value="1">2021</option>
+            <option value="2">2020</option>
+            <option value="3">2019</option>
+          </select>
+          <label for="floatingSelectGrid">開始西元年</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>月</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <label for="floatingSelectGrid">開始月份</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>年</option>
+            <option value="1">2021</option>
+            <option value="2">2020</option>
+            <option value="3">2019</option>
+          </select>
+          <label for="floatingSelectGrid">結束西元年</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+            <option selected>月</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <label for="floatingSelectGrid">月份</label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-dark">產生</button>
+    </div>
 
-</html>
 
+  </div>
+  <div class="content-down">
+    <div class="content-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">商店</th>
+            <th scope="col">留存率(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content-chart">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+
+</div>
+
+<script src="{% static 'js/rmf.js' %}"></script>
 
 {% endblock %}
