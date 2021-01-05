@@ -21,3 +21,12 @@ def inventory(request):
     return render(request, 'store/inventory.html',{
         'inventoryList': inventoryList
     })
+
+def rmf(request):
+    return render(request, 'store/rmf.html',{})
+
+def value(request):
+    return render(request, 'store/value.html',{})
+
+def active(request):
+    return render(request, 'store/active.html',{})
