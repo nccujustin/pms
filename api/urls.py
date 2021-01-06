@@ -23,9 +23,13 @@ urlpatterns = [
     path('material/order/list', views.currentOrderRecordAPI, name='materialCurrentOrderAPI'),
     path('material/order/history', views.historyOrderRecordAPI, name='materialCurrentOrderAPI'),
     path('material/order/add', views.addOrderAPI, name='materialAddOrderAPI'),
+    path('material/order/delete', marterials.deleteOrderAPI, name='materialAddOrderAPI'),
     path('store/order/list', stores.currentStoreRecordAPI, name='StoreCurrentOrderAPI'),
     path('store/order/history', stores.historyOrderRecordAPI, name='materialCurrentOrderAPI'),
     path('store/order/add', stores.addOrderAPI, name='StoreAddOrderAPI'),
+    path('store/order/delete', stores.deleteOrderAPI, name='StoreAddOrderAPI'),
     path('store/order/detail/<int:orderId>', stores.getOrderDetailAPI, name='StoreAddOrderAPI'),
     path('material/order/detail/<int:orderId>', marterials.getOrderDetailAPI, name='materialAddOrderAPI'),
+    path('eoq/<int:inventoryId>', marterials.getEOQAPI, name='getEOQAPI'),
+    path('epq/<int:inventoryId>', marterials.getEPQAPI, name='getEPQAPI'),
 ]

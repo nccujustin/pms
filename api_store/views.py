@@ -53,8 +53,6 @@ def currentStoreRecordAPI(request):
 
                     order = model_to_dict(order)
 
-                    print("order.storeId", order["storeId"])
-
                     data[k] = {
                         'data': [a],
                         'store': supplierObj[order["storeId"]],
@@ -135,7 +133,7 @@ def addOrderAPI(request):
                     productOrderId=order,
                     productInventoryId=inventoryTable[d["name"]])
 
-                	
+
 
                 )
 
@@ -153,4 +151,3 @@ def addOrderAPI(request):
                 'success': False
             }
             return JsonResponse(data)
-from django.shortcuts import render

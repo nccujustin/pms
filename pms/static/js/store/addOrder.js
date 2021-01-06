@@ -1,6 +1,6 @@
-let path = "/material/order/add"
+let path = "/store/order/add"
 
-let supplier = null
+let store = null
 let inputData = []
 
 for (let i = 0; i < 9; i++) {
@@ -47,7 +47,7 @@ function postData(url, data) {
 // ----------------------------------------
 
 function selectOnChange(sel) {
-  supplier = sel.options[sel.selectedIndex].value
+  store = sel.options[sel.selectedIndex].value
 }
 
 function inputOnchange(e) {
@@ -59,7 +59,7 @@ function inputOnchange(e) {
     ori['empty'] = false
   }
 
-  if (fieldName == 'price' || fieldName == 'weight') {
+  if (fieldName == 'price' || fieldName == 'amount') {
     ori[fieldName] = parseInt(e.value)
     return
   }
@@ -67,8 +67,8 @@ function inputOnchange(e) {
 }
 
 function send() {
-  if (supplier == null) {
-    alert("請選擇供應商")
+  if (store == null) {
+    alert("請選擇商店")
     return
   }
 
@@ -77,15 +77,15 @@ function send() {
   d = inputData.filter(x => x.empty != true)
 
   let data = {
-    supplier: supplier,
+    store: store,
     data: d
   }
-
+  console.log('sand data', data)
   postData(app.cst.API_HOST + path, data)
     .then(data => {
       console.log("postData", data)
       if (data.success) {
-        window.location.href = '/material/order/'
+        window.location.href = '/store/order/'
       }
     })
     .catch(error => console.error("error", error))

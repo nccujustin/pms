@@ -1,4 +1,4 @@
-app.state.orderList = null
+app.state.storeOrderList = null
 
 app.init = function () {
 
@@ -7,13 +7,13 @@ app.init = function () {
 
 app.getOrder = async function () {
   try {
-    let p = await app.getData(app.cst.API_HOST + "/material/order/history")
+    let p = await app.getData(app.cst.API_HOST + "/store/order/history")
     // store to state
-    app.state.orderList = p.data
+    app.state.storeOrderList = p.data
     // build totalweight and totalPrice
-    app.mappingData(app.state.orderList)
-    console.log('app.state.orderList', app.state.orderList)
-    app.showOrderList(app.state.orderList)
+    app.mappingData(app.state.storeOrderList)
+    console.log('app.state.orderList', app.state.storeOrderList)
+    app.showOrderList(app.state.storeOrderList)
   } catch (error) {
     console.error("error", error)
   }
@@ -22,19 +22,19 @@ app.getOrder = async function () {
 app.mappingData = function (data) {
   for (let id in data) {
     let totalPrice = 0
-    let totalWeight = 0
+    let totalAmount = 0
     for (let i = 0; i < data[id].data.length; i++) {
       let orderList = data[id].data[i];
-      totalPrice += orderList.price * orderList.weight
-      totalWeight += orderList.weight
+      totalPrice += parseInt(orderList.price) * parseInt(orderList.amount)
+      totalAmount += parseInt(orderList.amount)
     }
     data[id].totalPrice = totalPrice
-    data[id].totalWeight = totalWeight
+    data[id].totalAmount = totalAmount
   }
 }
 
 app.showOrderList = function (data) {
-  let container = document.getElementById("marterial-order-table-tr");
+  let container = document.getElementById("store-order-history-table-tr");
   if (!data) {
     console.log('no data')
   } else {
@@ -47,7 +47,7 @@ app.showOrderList = function (data) {
       }, trContainer);
       app.createElement("a", {
         atrs: {
-          href: "/material/order/detail/" + id,
+          href: "/store/order/detail/" + id,
           textContent: id,
           value: id
         }
@@ -57,9 +57,9 @@ app.showOrderList = function (data) {
       }, trContainer);
       app.createElement("a", {
         atrs: {
-          href: "/material/suppliers/" + data[id].supplier,
-          textContent: data[id].supplier,
-          value: data[id].supplier
+          href: "/store/list/" + data[id].store,
+          textContent: data[id].store,
+          value: data[id].store
         }
       }, supplier);
       app.createElement("td", {
@@ -70,8 +70,8 @@ app.showOrderList = function (data) {
       }, trContainer);
       app.createElement("td", {
         atrs: {
-          textContent: data[id].totalWeight,
-          value: data[id].totalWeight
+          textContent: data[id].totalAmount,
+          value: data[id].totalAmount
         }
       }, trContainer);
       app.createElement("td", {
@@ -82,8 +82,8 @@ app.showOrderList = function (data) {
       }, trContainer);
       app.createElement("td", {
         atrs: {
-          textContent: data[id].purchaseDate,
-          value: data[id].purchaseDate
+          textContent: data[id].deliveryDate,
+          value: data[id].deliveryDate
         }
       }, trContainer);
     }

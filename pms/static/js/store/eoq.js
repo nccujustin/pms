@@ -31,8 +31,4 @@ app.getOrder = async function () {
 
 app.showData = function () {
   document.getElementById("eoq-current-amount").textContent = app.state.eoq[0].currentAmount
-  document.getElementById("eoq-current-iYearNeed").textContent = app.state.eoq[0].iYearNeed
-  document.getElementById("eoq-current-iYearCost").textContent = app.state.eoq[0].iYearCost
-  document.getElementById("eoq-current-iYearOrderCost").textContent = app.state.eoq[0].iYearOrderCost
-  document.getElementById("eoq-current-eoq").textContent = app.state.eoq[0].eoq
 }

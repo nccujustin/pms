@@ -4,7 +4,7 @@ let app = {
     cart: null, auth: null, provider: null
   }, evts: {},
   cst: {
-    API_HOST: "http://code-server.wuhsun.com:8443/api",
+    API_HOST: window.location.protocol + "//" + window.location.host + "/api",
     token: ""
   }
 };
@@ -45,7 +45,7 @@ app.getData = function (url) {
 }
 
 
-app.postDate = function (url, data) {
+app.postData = function (url, data) {
   const request = new Request(
     url,
     {

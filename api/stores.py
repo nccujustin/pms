@@ -53,8 +53,6 @@ def currentStoreRecordAPI(request):
 
                     order = model_to_dict(order)
 
-                    print("order.storeId", order["storeId"])
-
                     data[k] = {
                         'data': [a],
                         'store': storeObj[order["storeId"]],
@@ -76,6 +74,7 @@ def currentStoreRecordAPI(request):
                 'success': False
             }
             return JsonResponse(data)
+
 
 def historyOrderRecordAPI(request):
     if request.method == 'GET':
@@ -117,8 +116,6 @@ def historyOrderRecordAPI(request):
                     order = Order.objects.get(id=a["productOrderId"])
 
                     order = model_to_dict(order)
-
-                    print("order.storeId", order["storeId"])
 
                     data[k] = {
                         'data': [a],
@@ -266,6 +263,30 @@ def getOrderDetailAPI(request, orderId):
                 'message': 'ok',
                 'success': True,
                 'data': d
+            }
+
+            return JsonResponse(data, encoder=DjangoJSONEncoder)
+        except Exception as e:
+            print("currentStoreRecordAPI errro msg", e)
+            data = {
+                'message': e,
+                'success': False
+            }
+            return JsonResponse(data)
+
+
+def deleteOrderAPI(request):
+    if request.method == 'POST':
+        try:
+            received_json_data = json.loads(request.body.decode("utf-8"))
+
+            print('received_json_data', received_json_data)
+
+            Order.objects.filter(id=received_json_data["id"]).delete()
+
+            data = {
+                'message': 'ok',
+                'success': True,
             }
 
             return JsonResponse(data, encoder=DjangoJSONEncoder)
