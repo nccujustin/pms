@@ -53,3 +53,6 @@ class OrderDetails(models.Model):
     materialInventoryId = models.ForeignKey(
         Inventory, blank=True, null=True, on_delete=models.CASCADE)
     creDate = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)

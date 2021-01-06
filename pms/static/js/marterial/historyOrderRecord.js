@@ -7,7 +7,7 @@ app.init = function () {
 
 app.getOrder = async function () {
   try {
-    let p = await app.getData(app.cst.API_HOST + "/material/order/list")
+    let p = await app.getData(app.cst.API_HOST + "/material/order/history")
     // store to state
     app.state.orderList = p.data
     // build totalweight and totalPrice
@@ -33,10 +33,6 @@ app.mappingData = function (data) {
   }
 }
 
-function show() {
-  alert("s")
-}
-
 app.showOrderList = function (data) {
   let container = document.getElementById("marterial-order-table-tr");
   if (!data) {
@@ -46,23 +42,12 @@ app.showOrderList = function (data) {
       let trContainer = app.createElement("tr", {
         atrs: { className: "" }
       }, container);
-      let trC = app.createElement("td", {}, trContainer);
-      app.createElement("input", {
+      app.createElement("td", {
         atrs: {
-          type: "checkbox",
-          name: "select-" + id,
-        }
-      }, trC);
-      // orderID
-      let orderIdC = app.createElement("td", {
-      }, trContainer);
-      app.createElement("a", {
-        atrs: {
-          href: "/material/order/detail/" + id,
           textContent: id,
           value: id
         }
-      }, orderIdC);
+      }, trContainer);
       app.createElement("td", {
         atrs: {
           textContent: data[id].supplier,

@@ -60,6 +60,10 @@ def editOrder(request, orderId):
     print(orderId)
     return render(request, 'material/currentOrderRecord.html')
 
+def orderDetail(request, orderId):
+    print(orderId)
+    return render(request, 'material/orderDetails.html')
+
 
 def addOrder(request):
     if request.method == 'GET':

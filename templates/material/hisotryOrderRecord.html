@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
 <div class="background" style="overflow-y: scroll;">
   <p id="now">原物料訂單歷史紀錄</p>
   <div class="record" style="overflow-y: scroll;">
@@ -15,20 +17,12 @@
         <th>進貨日期</th>
 
       </tr>
-      {% for order in historyList %}
-      <tr>
-        <td>{{ order.id }}</td>
-        <td>{{ order.materialOrderId.supplierId }}</td>
-        <td>${% widthratio order.amount 1 order.price %}</td>
-        <td>{{ order.weight }}</td>
-        <td>{{ order.materialOrderId.orderDate }}</td>
-        <td>{{ order.materialOrderId.purchaseDate }}</td>
-      </tr>
-      {% endfor %}
-
+      <!-- TODO fix this -->
     </table>
+    <div id="marterial-order-table-tr"></div>
   </div>
 </div>
+<script src="{% static 'js/marterial/historyOrderRecord.js' %}"></script>
 </body>
 
 </html>

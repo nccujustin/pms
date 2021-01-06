@@ -23,5 +23,6 @@ urlpatterns = [
     path('order/edit/<int:orderId>', views.editOrder, name='materialEditOrder'),
     path('history/', views.historyOrderRecord, name='materialOrderRecord'),
     path('inventory/', views.inventory, name='materialOrderRecord'),
-    path('order/add/', views.addOrder, name='materialAddOrderRecord'),
+    path('order/add', views.addOrder, name='materialAddOrderRecord'),
+    path('order/detail/<int:orderId>', views.orderDetail, name='materialAddOrderRecord'),
 ]
