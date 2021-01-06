@@ -19,11 +19,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('order', views.currentOrderRecord, name='storeOrder'),
-    path('history', views.hisotryOrderRecord, name='storeHistory'),
-    path('inventory', views.inventory, name='storeInventory'),
-    path('rmf', views.rmf, name='storeRmf'),
-    path('value', views.value, name='storeValue'),
-    path('active', views.active, name='storeActive'),
+    path('order/', views.currentOrderRecord, name='storeOrder'),
+    path('history/', views.hisotryOrderRecord, name='storeHistory'),
+    path('inventory/', views.inventory, name='storeInventory'),
+    path('rmf/', views.rmf, name='storeRmf'),
+    path('value/', views.value, name='storeValue'),
+    path('active/', views.active, name='storeActive'),
     path('order/add', views.addOrder, name='storeActive'),
 ]
