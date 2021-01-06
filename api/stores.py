@@ -129,7 +129,7 @@ def addOrderAPI(request):
 
                 # 建立 material_orderdetails loop data 用 bulk_create 去產資料
                 bulk_arr.append(OrderDetail(
-                    amount=d["amountt"],
+                    amount=d["amount"],
                     price=d["price"],
                     EXP=exp,
                     productOrderId=order,
@@ -139,7 +139,7 @@ def addOrderAPI(request):
 
                 )
 
-            OrderDetails.objects.bulk_create(bulk_arr)
+            OrderDetail.objects.bulk_create(bulk_arr)
 
             data = {
                 'message': 'message',
