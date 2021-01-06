@@ -77,6 +77,71 @@ def currentOrderRecordAPI(request):
             }
             return JsonResponse(data)
 
+def historyOrderRecordAPI(request):
+    if request.method == 'GET':
+        try:
+            supplierList = []
+            supplierObj = {}
+
+            orderList = []
+            orderObj = {}
+
+            data = {}
+
+            arr = []
+
+            supplier = Supplier.objects.all()
+
+            orderList = OrderDetails.objects.all().select_related(
+                'materialOrderId', 'materialInventoryId')
+
+            for s in supplier:
+                supplierList.append(model_to_dict(s))
+                sId = s.id
+                supplierObj[sId] = s.name
+
+            for order in orderList:
+                now = datetime.datetime.now()
+
+                d = datetime.date(now.year, now.month, now.day)
+
+                if (d > order.materialOrderId.purchaseDate) == True:
+                    arr.append(order)
+
+            for a in arr:
+                k = str(a.materialOrderId.id)
+                a = model_to_dict(a)
+                try:
+                    data[k]['data'].append(a)
+                except KeyError:
+                    order = Order.objects.get(id=a["materialOrderId"])
+
+                    order = model_to_dict(order)
+
+                    print("order.supplierId", order["supplierId"])
+
+                    data[k] = {
+                        'data': [a],
+                        'supplier': supplierObj[order["supplierId"]],
+                        'orderDate': order["orderDate"],
+                        'purchaseDate': order["purchaseDate"],
+                    }
+
+            data = {
+                'message': 'ok',
+                'success': True,
+                'data': data
+            }
+
+            return JsonResponse(data, encoder=DjangoJSONEncoder)
+        except Exception as e:
+            print("currentOrderRecordAPI errro msg", e)
+            data = {
+                'message': e,
+                'success': False
+            }
+            return JsonResponse(data)
+
 
 def addOrderAPI(request):
     if request.method == 'POST':
@@ -151,3 +216,4 @@ def addOrderAPI(request):
                 'success': False
             }
             return JsonResponse(data)
+

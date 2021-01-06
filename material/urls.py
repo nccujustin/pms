@@ -25,4 +25,7 @@ urlpatterns = [
     path('inventory/', views.inventory, name='materialOrderRecord'),
     path('order/add', views.addOrder, name='materialAddOrderRecord'),
     path('order/detail/<int:orderId>', views.orderDetail, name='materialAddOrderRecord'),
+    path('suppliers/<str:supplierId>', views.suppliersPage, name='suppliersList'),
+    path('eoq/', views.eoqPage, name='eoqPage'),
+    path('epg/', views.epgPage, name='epgPage'),
 ]

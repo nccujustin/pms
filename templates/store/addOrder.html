@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="background"  >
+<div class="background"  style="overflow-y: scroll;" >
   <p id="now">新增商品訂單</p>
   <div class="tablebody">
       <table class="tablebdy">
@@ -142,13 +142,21 @@
   </div>
   <div class="store">
      <label >商店: </label>
-     <label class="supplier">是要怎麼放啦幹</label>
-     <button class="save" type="button" onclick="location.href='網址放這裡'">
-      <i class="fas fa-save"></i>   儲存</button>
-  </div>
+     <select class="add-order-form-select" onchange="selectOnChange(this)" name="selecter" id="floatingSelectGrid" aria-label="Floating label select example">
+        <option selected>請選擇商店</option>
+        {% for store in storerList %}
+        <option value="{{store.id}}">{{store.name}}</option>
+        {% endfor %}
+      </select>
+      <button class="save" onclick="send()">
+        <i class="fas fa-save"></i> 儲存</button>
+    </div>
+  <!-- </form> -->
 </div>
+<script src="{% static 'js/marterial/addOrder.js' %}"></script>
 
 </body>
 
+</html>
 {% endblock %}
 

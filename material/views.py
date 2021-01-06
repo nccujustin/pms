@@ -20,7 +20,7 @@ def currentOrderRecord(request):
 
         if (d > order.materialOrderId.purchaseDate) == False:
             arr.append(order)
-    
+
     for a in arr:
         k = str(a.materialOrderId.id)
         try:
@@ -60,6 +60,7 @@ def editOrder(request, orderId):
     print(orderId)
     return render(request, 'material/currentOrderRecord.html')
 
+
 def orderDetail(request, orderId):
     print(orderId)
     return render(request, 'material/orderDetails.html')
@@ -85,3 +86,23 @@ def addOrder(request):
             'n': n,
             'supplierList': supplier
         })
+
+
+def suppliersPage(request, supplierId):
+    if request.method == 'GET':
+        supplier = Supplier.objects.get(name=supplierId)
+
+        return render(request, 'material/suppliers.html', {
+            'supplier': supplier
+        })
+
+
+def eoqPage(request):
+    if request.method == 'GET':
+
+        return render(request, 'material/eoq.html', {})
+
+def epgPage(request):
+    if request.method == 'GET':
+
+        return render(request, 'material/eoq.html', {})

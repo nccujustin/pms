@@ -42,18 +42,26 @@ app.showOrderList = function (data) {
       let trContainer = app.createElement("tr", {
         atrs: { className: "" }
       }, container);
-      app.createElement("td", {
+      // orderID
+      let orderIdC = app.createElement("td", {
+      }, trContainer);
+      app.createElement("a", {
         atrs: {
+          href: "/material/order/detail/" + id,
           textContent: id,
           value: id
         }
+      }, orderIdC);
+      // supplier
+      let supplier = app.createElement("td", {
       }, trContainer);
-      app.createElement("td", {
+      app.createElement("a", {
         atrs: {
+          href: "/material/suppliers/" + data[id].supplier,
           textContent: data[id].supplier,
           value: data[id].supplier
         }
-      }, trContainer);
+      }, supplier);
       app.createElement("td", {
         atrs: {
           textContent: "$" + data[id].totalPrice,

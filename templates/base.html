@@ -24,7 +24,8 @@
 
     .material-content a,
     .product-content a,
-    .index-content a {
+    .index-content a,
+    .operation-content a {
       float: none;
       font-size: 26px;
       color: black;
@@ -40,7 +41,8 @@
 
     .material,
     .product,
-    .index {
+    .index,
+    .operation {
       float: none;
       overflow: hidden;
       text-decoration: none;
@@ -53,7 +55,8 @@
 
     .materialbtn,
     .productbtn,
-    .indexbtn {
+    .indexbtn,
+    .operationbtn {
       font-size: 26px;
       border: none;
       /*邊框*/
@@ -71,7 +74,9 @@
     .index:hover .indexbtn,
     .material-content a:hover,
     .product-content a:hover,
-    .index-content a:hover {
+    .index-content a:hover,
+    .operation:hover .operationbtn,
+    .operation-content a:hover {
       background-color: rgb(0, 128, 0);
       /*滑鼠移到上方後的背景顏色*/
       color: white;
@@ -80,7 +85,8 @@
 
     .material-content,
     .product-content,
-    .index-content {
+    .index-content,
+    .operation-content {
       /*隱藏次選單*/
       background-color: white;
       color: black;
@@ -95,7 +101,8 @@
 
     .material:hover .material-content,
     .product:hover .product-content,
-    .index:hover .index-content {
+    .index:hover .index-content,
+    .operation:hover .operation-content {
       /*滑鼠移到上方顯示選單*/
       display: block;
     }
@@ -242,6 +249,34 @@
 
   }
 
+   .eoq-select {
+      margin-right: 100px;
+   }
+
+   label {
+      font-size: 30px;
+   }
+
+    .select_matel select, .store select, .supply select{
+      background-color:rgb(60, 179, 113);
+      color: white;
+      padding: 10px;
+      width: 250px;
+      border: none;
+      font-size: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      -webkit-appearance: button;
+      appearance: button;
+      outline: none;
+      margin-left: 10px;
+    }
+
+    .select:hover::before {
+      color: white;
+      background-color: rgb(60, 179, 113);
+    }
+
+
 
   </style>
 </head>
@@ -284,6 +319,16 @@
         <a href="/store/rmf">RFM</a>
         <a href="/store/active">顧客活動指標</a>
         <a href="/store/value">顧客價值指標</a>
+      </div>
+    </div>
+    <!-- 
+  --><div class="operation">
+      <button class="operationbtn">作業管理
+        <i class="fas fa-caret-down"></i>
+      </button>
+      <div class="operation-content">
+        <a href="/material/eoq">EOQ</a>
+        <a href="/material/epq">EPQ</a>
       </div>
     </div>
   </div>

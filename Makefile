@@ -1,5 +1,7 @@
 appName=
 mv= # migrate version
+v=
+projectName=pms
 
 echo:
 	@echo "benn"
@@ -19,5 +21,9 @@ migrations-dry-run:
 	
 migrations:
 	@python manage.py migrate ${appName} ${mv}
+build-image:
+	@docker build -t ${projectName}:${v} .
+run-image:
+	@docker run -idt -p 3000:8000 ${projectName}:${v}
 
 .PHONY: echo dev createApp makemigrations migrations

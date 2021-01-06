@@ -63,12 +63,16 @@ app.showOrderList = function (data) {
           value: id
         }
       }, orderIdC);
-      app.createElement("td", {
+      // supplier
+      let supplier = app.createElement("td", {
+      }, trContainer);
+      app.createElement("a", {
         atrs: {
+          href: "/material/suppliers/" + data[id].supplier,
           textContent: data[id].supplier,
           value: data[id].supplier
         }
-      }, trContainer);
+      }, supplier);
       app.createElement("td", {
         atrs: {
           textContent: "$" + data[id].totalPrice,
