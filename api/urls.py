@@ -22,6 +22,6 @@ urlpatterns = [
     path('material/order/detail/<int:orderId>', marterials.getOrderDetailAPI, name='materialAddOrderAPI'),
     path('material/order/list', views.currentOrderRecordAPI, name='materialCurrentOrderAPI'),
     path('material/order/add', views.addOrderAPI, name='materialAddOrderAPI'),
-    path('store/order/list', stores.currentStoreRecordAPI, name='StoreAddOrderAPI'),
+    path('store/order/list', stores.currentStoreRecordAPI, name='StoreCurrentOrderAPI'),
     path('store/order/add', stores.addOrderAPI, name='StoreAddOrderAPI'),
 ]

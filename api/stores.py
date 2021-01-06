@@ -57,7 +57,7 @@ def currentStoreRecordAPI(request):
 
                     data[k] = {
                         'data': [a],
-                        'store': supplierObj[order["storeId"]],
+                        'store': storeObj[order["storeId"]],
                         'orderDate': order["orderDate"],
                         'deliveryDate': order["deliveryDate"],
                     }
