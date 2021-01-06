@@ -2,6 +2,7 @@ appName=
 mv= # migrate version
 v=
 projectName=pms
+image=
 
 echo:
 	@echo "benn"
@@ -25,5 +26,7 @@ build-image:
 	@docker build -t ${projectName}:${v} .
 run-image:
 	@docker run -idt -p 3000:8000 ${projectName}:${v}
+delete-and-run-image:
+	@make build-image -e v=${v} && docker stop ${image} && make run-image -e v=${v}
 
 .PHONY: echo dev createApp makemigrations migrations
