@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from . import views
+from . import views, stores
 
 urlpatterns = [
     path('material/order/list', views.currentOrderRecordAPI, name='materialCurrentOrderAPI'),
     path('material/order/add', views.addOrderAPI, name='materialAddOrderAPI'),
+    path('store/order/list', stores.currentStoreRecordAPI, name='StoreAddOrderAPI'),
+    path('store/order/add', stores.addOrderAPI, name='StoreAddOrderAPI'),
+    
 ]

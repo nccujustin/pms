@@ -25,4 +25,5 @@ urlpatterns = [
     path('rmf/', views.rmf, name='storeRmf'),
     path('value/', views.value, name='storeValue'),
     path('active/', views.active, name='storeActive'),
+    path('order/add', views.addOrder, name='storeActive'),
 ]

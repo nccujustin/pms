@@ -58,3 +58,6 @@ def value(request):
 
 def active(request):
     return render(request, 'store/active.html', {})
+
+def addOrder(request):
+    return render(request, 'store/addOrder.html', {})
