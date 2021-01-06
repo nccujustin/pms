@@ -2,13 +2,15 @@
 
 {% block content %}
 
+{% load static %}
+
 <div class="background" style="overflow-y: scroll;">
   <p id="now">原物料現有訂單</p>
   <div class="function">
-    <button class="add" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-plus"></i> 新增</button>
-    <button class="delete" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-trash-alt"></i> 刪除</button>
-    <button class="revise" type="button" onclick="location.href='網址放這裡'"><i class="fas fa-pencil-alt"></i> 修改</button>
-    <button class="save" type="button" onclick="location.href='網址放這裡'"> <i class="fas fa-save"></i> 儲存</button>
+    <button class="add" type="button" onclick="location.href='/material/order/add/'"><i class="fas fa-plus"></i> 新增</button>
+    <button class="delete" type="button" onclick="location.href='#'"><i class="fas fa-trash-alt"></i> 刪除</button>
+    <button class="revise" type="button" onclick="location.href='#'"><i class="fas fa-pencil-alt"></i> 修改</button>
+    <button class="save" type="button" onclick="location.href='#'"> <i class="fas fa-save"></i> 儲存</button>
   </div>
   <div class="record" style="overflow-y: scroll;">
     <table class="tablebody">
@@ -25,7 +27,7 @@
       {% for order in orderList %}
       <tr>
         <td><input type="checkbox" name="select" style="width: 20px;height: 20px;"></td>
-        <td>{{ order.id }}</td>
+        <td>{{ order.materialOrderId.id }}</td>
         <td>{{ order.materialOrderId.supplierId }}</td>
         <td>${% widthratio order.amount 1 order.price %}</td>
         <td>{{ order.weight }}</td>
@@ -37,6 +39,7 @@
     </table>
   </div>
 </div>
+<script src="{% static 'js/marterial/currentOrderRecord.js' %}"></script>
 </body>
 
 </html>

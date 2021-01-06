@@ -25,5 +25,6 @@ urlpatterns = [
     path('material/', include('material.urls')),
     path('store/', include('store.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     path('', TemplateView.as_view(template_name='landing.html'), name='landing')
 ]

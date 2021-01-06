@@ -1,0 +1,60 @@
+{% extends '../base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="background">
+  <p id="now">新增原物料訂單</p>
+  <!-- <form method="post" action="/material/order/add/">{% csrf_token %} -->
+    <div class="tablebody">
+      <table class="tablebdy" style="overflow-y: scroll;">
+        <tr>
+          <th>名稱</th>
+          <th>單價</th>
+          <th>重量</th>
+          <th>產地</th>
+          <th>保存期限</th>
+        </tr>
+        {% for nn in n %}
+        <tr>
+          <td>
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.name}}" type="text" value="">
+          </td>
+          <td>
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.price}}" type="number" value="">
+          </td>
+          <td>
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.weight}}" type="number" value="">
+          </td>
+          <td>
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.origin}}" type="text" value="">
+          </td>
+          <td>
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.exp}}" type="text" value="">
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="supply">
+      <!-- supplierList -->
+      <label>供應商: </label>
+      <select class="add-order-form-select" onchange="selectOnChange(this)" name="selecter" id="floatingSelectGrid" aria-label="Floating label select example">
+        <option selected>請選擇供應商</option>
+        {% for supplier in supplierList %}
+        <option value="{{supplier.id}}">{{supplier.name}}</option>
+        {% endfor %}
+      </select>
+      <button class="save" onclick="send()">
+        <i class="fas fa-save"></i> 儲存</button>
+    </div>
+  <!-- </form> -->
+</div>
+<script src="{% static 'js/marterial/addOrder.js' %}"></script>
+
+</body>
+
+</html>
+
+{% endblock %}

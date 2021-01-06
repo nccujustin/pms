@@ -19,9 +19,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('order/', views.currentOrderRecord, name='materialOrder'),
-    path('order/edit/<int:orderId>', views.editOrder, name='materialEditOrder'),
-    path('history/', views.historyOrderRecord, name='materialOrderRecord'),
-    path('inventory/', views.inventory, name='materialOrderRecord'),
-    path('order/add/', views.addOrder, name='materialAddOrderRecord'),
+    path('material/order/list', views.currentOrderRecordAPI, name='materialCurrentOrderAPI'),
+    path('material/order/add', views.addOrderAPI, name='materialAddOrderAPI'),
 ]

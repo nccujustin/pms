@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Supplier(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=10)  # 名稱
     phone = models.CharField(max_length=20)  # 電話
     address = models.CharField(max_length=100)  # 地址
@@ -36,7 +37,7 @@ class Inventory(models.Model):
     creDate = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
 # 原物料訂單細目
 

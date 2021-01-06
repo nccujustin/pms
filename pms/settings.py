@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'welcome',
     'product',
     'store',
-    'material'
+    'material',
+    'api'
 ]
 
 MIDDLEWARE = [
