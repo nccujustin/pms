@@ -33,10 +33,6 @@ app.mappingData = function (data) {
   }
 }
 
-function show() {
-  alert("s")
-}
-
 app.showOrderList = function (data) {
   let container = document.getElementById("marterial-order-table-tr");
   if (!data) {
@@ -46,13 +42,6 @@ app.showOrderList = function (data) {
       let trContainer = app.createElement("tr", {
         atrs: { className: "" }
       }, container);
-      let trC = app.createElement("td", {}, trContainer);
-      app.createElement("input", {
-        atrs: {
-          type: "checkbox",
-          name: "select-" + id,
-        }
-      }, trC);
       // orderID
       let orderIdC = app.createElement("td", {
       }, trContainer);
@@ -97,8 +86,51 @@ app.showOrderList = function (data) {
           value: data[id].purchaseDate
         }
       }, trContainer);
+      let buttonC = app.createElement("td", {}, trContainer);
+      let bC = app.createElement("button", {
+        atrs: {
+          className: "delete",
+          onclick: () => app.deleteData(id)
+        }
+      }, buttonC);
+      app.createElement("i", {
+        atrs: {
+          className: "fas fa-trash-alt",
+          textContent: "刪除",
+        }
+      }, bC);
     }
   }
+}
+
+function postData(url, data) {
+  const request = new Request(
+    url,
+    {
+      body: JSON.stringify(data),
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        "Cache-Control": "no-cache",
+        'content-type': 'application/json'
+      }
+    }
+  );
+  return fetch(request)
+    .then(response => response.json())
+}
+
+app.deleteData = function (id) {
+  console.log('id', id)
+  let data = { 'id': parseInt(id) }
+  postData(app.cst.API_HOST + "/material/order/delete", data)
+    .then(data => {
+      console.log("postData", data)
+      if (data.success) {
+        window.location.href = '/material/order/'
+      }
+    })
+    .catch(error => console.error("error", error))
 }
 
 window.addEventListener("DOMContentLoaded", app.init);

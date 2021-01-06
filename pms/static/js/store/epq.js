@@ -30,4 +30,8 @@ app.getOrder = async function () {
 
 app.showData = function () {
   document.getElementById("epq-current-amount").textContent = app.state.epq[0].currentAmount
+  document.getElementById("epq-current-iYearNeed").textContent = app.state.epq[0].iYearNeed
+  document.getElementById("epq-current-iYearCost").textContent = app.state.epq[0].iYearCost
+  document.getElementById("epq-current-iYearOrderCost").textContent = app.state.epq[0].iYearOrderCost
+  document.getElementById("epq-current-epq").textContent = app.state.epq[0].epq
 }
