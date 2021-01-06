@@ -1,58 +1,36 @@
 {% extends '../base.html' %}
 
 {% block content %}
-<div class="background"  style="overflow-y: scroll;" >
+
+{% load static %}
+
+<div class="background" style="overflow-y: scroll;">
   <p id="now">商品訂單細目</p>
-    <label id="now">訂單編號 :  </label>
-    <label id="now">顯示前面給的編號ㄚㄚㄚ</label>
-   <div class="record" >
-    <table class="tablehead" >
-    <tr>
-      <th>名稱</th>
-      <th>單價</th>
-      <th>數量</th>
-      <th>金額</th>
-      <th>保存期限</th>    
-    </tr>
-    <tr>
-    
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>  
+  <label id="now">訂單編號 : </label>
+  <label class="current-order-detail-number" id="now">顯示前面給的編號ㄚㄚㄚ</label>
+  <div class="record">
+    <table class="tablehead">
+      <tr>
+        <th>名稱</th>
+        <th>單價</th>
+        <th>數量</th>
+        <th>金額</th>
+        <th>保存期限</th>
+      </tr>
+
     </table>
+    <!-- TODO fix this -->
+    </table>
+    <div id="store-order-detail-table-tr"></div>
   </div>
   <div class="money">
-     <label >商店: </label>
-     <label >______</label>
+    <label>價格: </label>
+    <label class="current-order-detail-store">______</label>
   </div>
 </div>
 </body>
+<script src="{% static 'js/store/orderDetail.js' %}"></script>
+
 </html>
 
 {% endblock %}

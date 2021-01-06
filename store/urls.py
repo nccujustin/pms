@@ -26,4 +26,7 @@ urlpatterns = [
     path('value/', views.value, name='storeValue'),
     path('active/', views.active, name='storeActive'),
     path('order/add', views.addOrder, name='storeActive'),
+    path('order/add', views.addOrder, name='storeActive'),
+    path('order/detail/<int:orderId>', views.orderDetailPage, name='storeActive'),
+    path('list/<str:storeId>', views.storePage, name='storeActive'),
 ]

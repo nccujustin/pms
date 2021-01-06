@@ -1,15 +1,6 @@
-let mockData = {
-  "store": 4,
-  "data": [
-    { "field": 0, "empty": false, "name": "桶裝啤酒", "price": 10, "amount": 1000, "exp": "2010-12-12" },
-    { "field": 1, "empty": false, "name": "金牌free", "price": 100, "amount": 100, "exp": "2010-12-12" }
-  ]
-}
+let path = "/store/order/add"
 
-let requestURL = "http://code-server-1.wuhsun.com:8443"
-let path = "/api/store/order/add"
-
-let supplier = null
+let store = null
 let inputData = []
 
 for (let i = 0; i < 9; i++) {
@@ -35,10 +26,6 @@ function getCookie(name) {
 
 csrftoken = app.getCookie('csrftoken');
 
-console.log(csrftoken)
-
-
-
 function postData(url, data) {
   const request = new Request(
     url,
@@ -60,7 +47,7 @@ function postData(url, data) {
 // ----------------------------------------
 
 function selectOnChange(sel) {
-  supplier = sel.options[sel.selectedIndex].value
+  store = sel.options[sel.selectedIndex].value
 }
 
 function inputOnchange(e) {
@@ -72,7 +59,7 @@ function inputOnchange(e) {
     ori['empty'] = false
   }
 
-  if (fieldName == 'price' || fieldName == 'weight') {
+  if (fieldName == 'price' || fieldName == 'amount') {
     ori[fieldName] = parseInt(e.value)
     return
   }
@@ -80,21 +67,21 @@ function inputOnchange(e) {
 }
 
 function send() {
-  // if (supplier == null) {
-  //   alert("請選擇供應商")
-  //   return
-  // }
+  if (store == null) {
+    alert("請選擇商店")
+    return
+  }
 
   // TODO : check value if exist
 
-  // d = inputData.filter(x => x.empty != true)
+  d = inputData.filter(x => x.empty != true)
 
-  // let data = {
-  //   supplier: supplier,
-  //   data: d
-  // }
-  console.log('sand data', mockData)
-  postData(requestURL + path, mockData)
+  let data = {
+    store: store,
+    data: d
+  }
+  console.log('sand data', data)
+  postData(app.cst.API_HOST + path, data)
     .then(data => {
       console.log("postData", data)
       if (data.success) {

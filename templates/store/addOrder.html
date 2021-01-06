@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
 <div class="background" style="overflow-y: scroll;">
 
   <div class="background">
@@ -14,132 +16,26 @@
           <th>數量</th>
           <th>保存期限</th>
         </tr>
+        {% for nn in n %}
         <tr>
           <td>
-            <input class="name" type="text">
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.name}}" type="text"
+              value="">
           </td>
           <td>
-            <input class="name" type="number">
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.price}}" type="number"
+              value="">
           </td>
           <td>
-            <input class="name" type="number">
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.amount}}" type="number"
+              value="">
           </td>
           <td>
-            <input class="name" type="text">
+            <input onchange="inputOnchange(this)" class="{% cycle 'name' 'name2' %}" name="{{nn.exp}}" type="text"
+              value="">
           </td>
         </tr>
-        <tr>
-          <td>
-            <input class="name2" type="text">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name" type="text">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name2" type="text">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name" type="text">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name2" type="text">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name" type="text">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name2" type="text">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="number">
-          </td>
-          <td>
-            <input class="name2" type="text">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input class="name" type="text">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="number">
-          </td>
-          <td>
-            <input class="name" type="text">
-          </td>
-        </tr>
+        {% endfor %}
       </table>
     </div>
     <div class="store">
@@ -147,7 +43,7 @@
       <select class="add-order-form-select" onchange="selectOnChange(this)" name="selecter" id="floatingSelectGrid"
         aria-label="Floating label select example">
         <option selected>請選擇商店</option>
-        {% for store in storerList %}
+        {% for store in storeList %}
         <option value="{{store.id}}">{{store.name}}</option>
         {% endfor %}
       </select>
@@ -156,7 +52,7 @@
     </div>
     <!-- </form> -->
   </div>
-  <script src="{% static 'js/marterial/addOrder.js' %}"></script>
+  <script src="{% static 'js/store/addOrder.js' %}"></script>
 
   </body>
 

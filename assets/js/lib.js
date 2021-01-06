@@ -45,7 +45,7 @@ app.getData = function (url) {
 }
 
 
-app.postDate = function (url, data) {
+app.postData = function (url, data) {
   const request = new Request(
     url,
     {

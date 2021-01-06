@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Order, OrderDetails, Inventory, Supplier
+from store.models import Inventory as StoreInventory
 from datetime import timedelta
 import datetime
 import json
@@ -60,6 +61,7 @@ def editOrder(request, orderId):
     print(orderId)
     return render(request, 'material/currentOrderRecord.html')
 
+
 def orderDetail(request, orderId):
     print(orderId)
     return render(request, 'material/orderDetails.html')
@@ -72,7 +74,6 @@ def orderDetail(request, orderId):
 
 def addOrder(request):
     if request.method == 'GET':
-        print("get")
         n = []
         for i in range(9):
             i = str(i)
@@ -103,10 +104,11 @@ def suppliersPage(request, supplierId):
 
 def eoqPage(request):
     if request.method == 'GET':
+        inventory = Inventory.objects.all()
+        return render(request, 'material/eoq.html', {'inventoryList': inventory})
 
-        return render(request, 'material/eoq.html', {})
 
-def epgPage(request):
+def epqPage(request):
     if request.method == 'GET':
-
-        return render(request, 'material/eoq.html', {})
+        inventory = StoreInventory.objects.all()
+        return render(request, 'material/epq.html', {'inventoryList': inventory})

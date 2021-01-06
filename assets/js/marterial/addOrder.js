@@ -1,5 +1,4 @@
-let requestURL = "http://code-server.wuhsun.com:8443"
-let path = "/api/material/order/add"
+let path = "/material/order/add"
 
 let supplier = null
 let inputData = []
@@ -26,8 +25,6 @@ function getCookie(name) {
 }
 
 csrftoken = app.getCookie('csrftoken');
-
-
 
 function postData(url, data) {
   const request = new Request(
@@ -84,7 +81,7 @@ function send() {
     data: d
   }
 
-  postData(requestURL + path, data)
+  postData(app.cst.API_HOST + path, data)
     .then(data => {
       console.log("postData", data)
       if (data.success) {

@@ -2,15 +2,19 @@
 
 {% block content %}
 
+{% load static %}
+
 <div class="background"  >
   <p id="now">EOQ</p>
   <div class="selecet_matel">
     <label>原物料 : </label>
-    <select class="eoq-select" name="selecter">
+    <select class="eoq-select" onchange="selectOnChange(this)" name="selecter"  id="floatingSelectGrid" aria-label="Floating label select example">
         <option selected>請選擇原料</option>
-        <option></option> 
-    </select>
-    <button class="save" onclick="send()"></i> 產生</button>
+        {% for inventory in inventoryList %}
+        <option value="{{inventory.id}}">{{supplier.name}}</option> 
+        {% endfor %}
+      </select>
+    <button class="save" onclick="()"> 產生</button>
   </div>
   <div class="record" >
     <table class="tablehead" >
@@ -18,10 +22,12 @@
         <th>資訊</th>
         <th>數值</th>    
       </tr>
+      {% for inventory in inventoryList %}
       <tr>
-        <td>目前存量</td>
-        <td></td>
+        <td>目前存量</td>  
+        <td>{{ inventory.currentAmount }}</td>
       </tr>
+      {% endfor %}
       <tr>
         <td>年度需求量</td>
         <td></td>
@@ -41,6 +47,7 @@
     </table>
   </div>
 </div>
+<script src="{% static 'js/store/eoq.js' %}"></script>
 </body>
 </html>
 

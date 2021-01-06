@@ -77,6 +77,71 @@ def currentStoreRecordAPI(request):
             }
             return JsonResponse(data)
 
+def historyOrderRecordAPI(request):
+    if request.method == 'GET':
+        try:
+            storeList = []
+            storeObj = {}
+
+            orderList = []
+            orderObj = {}
+
+            data = {}
+
+            arr = []
+
+            store = Store.objects.all()
+
+            orderList = OrderDetail.objects.all().select_related(
+                'productOrderId', 'productInventoryId')
+
+            for s in store:
+                storeList.append(model_to_dict(s))
+                sId = s.id
+                storeObj[sId] = s.name
+
+            for order in orderList:
+                now = datetime.datetime.now()
+
+                d = datetime.date(now.year, now.month, now.day)
+
+                if (d > order.productOrderId.deliveryDate) == True:
+                    arr.append(order)
+
+            for a in arr:
+                k = str(a.productOrderId.id)
+                a = model_to_dict(a)
+                try:
+                    data[k]['data'].append(a)
+                except KeyError:
+                    order = Order.objects.get(id=a["productOrderId"])
+
+                    order = model_to_dict(order)
+
+                    print("order.storeId", order["storeId"])
+
+                    data[k] = {
+                        'data': [a],
+                        'store': storeObj[order["storeId"]],
+                        'orderDate': order["orderDate"],
+                        'deliveryDate': order["deliveryDate"],
+                    }
+
+            data = {
+                'message': 'ok',
+                'success': True,
+                'data': data
+            }
+
+            return JsonResponse(data, encoder=DjangoJSONEncoder)
+        except Exception as e:
+            print("currentStoreRecordAPI errro msg", e)
+            data = {
+                'message': e,
+                'success': False
+            }
+            return JsonResponse(data)
+
 
 def addOrderAPI(request):
     if request.method == 'POST':
@@ -135,7 +200,7 @@ def addOrderAPI(request):
                     productOrderId=order,
                     productInventoryId=inventoryTable[d["name"]])
 
-                	
+
 
                 )
 
@@ -153,4 +218,61 @@ def addOrderAPI(request):
                 'success': False
             }
             return JsonResponse(data)
-from django.shortcuts import render
+
+
+def getOrderDetailAPI(request, orderId):
+    if request.method == 'GET':
+        try:
+            storeList = []
+            storeObj = {}
+
+            orderList = []
+            orderObj = {}
+
+            data = {}
+
+            d = []
+
+            arr = []
+
+            store = Store.objects.all()
+
+            orderList = OrderDetail.objects.all().select_related(
+                'productOrderId', 'productInventoryId')
+
+            inventory = Inventory.objects.all()
+
+            inventoryTable = {}
+
+            for i in inventory:
+                inventoryTable[i.id] = i.name
+
+            for s in store:
+                sId = s.id
+                storeObj[sId] = s.name
+
+            for order in orderList:
+                arr.append(order)
+
+            for a in arr:
+                k = str(a.productOrderId.id)
+                orderId = str(orderId)
+                if k == orderId:
+                    a = model_to_dict(a)
+                    a["inventoryName"] = inventoryTable[a["productInventoryId"]]
+                    d.append(a)
+
+            data = {
+                'message': 'ok',
+                'success': True,
+                'data': d
+            }
+
+            return JsonResponse(data, encoder=DjangoJSONEncoder)
+        except Exception as e:
+            print("currentStoreRecordAPI errro msg", e)
+            data = {
+                'message': e,
+                'success': False
+            }
+            return JsonResponse(data)
