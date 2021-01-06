@@ -7,12 +7,13 @@
 <div class="background" style="overflow-y: scroll;">
   <p id="now">原物料現有訂單</p>
   <div class="function">
-    <button class="add" type="button" onclick="location.href='/material/order/add/'"><i class="fas fa-plus"></i> 新增</button>
+    <button class="add" type="button" onclick="location.href='/material/order/add/'"><i class="fas fa-plus"></i>
+      新增</button>
     <button class="delete" type="button" onclick="location.href='#'"><i class="fas fa-trash-alt"></i> 刪除</button>
     <button class="revise" type="button" onclick="location.href='#'"><i class="fas fa-pencil-alt"></i> 修改</button>
     <button class="save" type="button" onclick="location.href='#'"> <i class="fas fa-save"></i> 儲存</button>
   </div>
-  <div class="record" style="overflow-y: scroll;">
+  <div id="marterial-order-table" class="record" style="overflow-y: scroll;">
     <table class="tablebody">
       <tr>
         <th>選取</th>
@@ -22,21 +23,10 @@
         <th>總重(公斤)</th>
         <th>訂單日期</th>
         <th>進貨日期</th>
-
       </tr>
-      {% for order in orderList %}
-      <tr>
-        <td><input type="checkbox" name="select" style="width: 20px;height: 20px;"></td>
-        <td>{{ order.materialOrderId.id }}</td>
-        <td>{{ order.materialOrderId.supplierId }}</td>
-        <td>${% widthratio order.amount 1 order.price %}</td>
-        <td>{{ order.weight }}</td>
-        <td>{{ order.materialOrderId.orderDate }}</td>
-        <td>{{ order.materialOrderId.purchaseDate }}</td>
-      </tr>
-      {% endfor %}
-
+<!-- TODO fix this -->
     </table>
+    <div id="marterial-order-table-tr"></div>
   </div>
 </div>
 <script src="{% static 'js/marterial/currentOrderRecord.js' %}"></script>

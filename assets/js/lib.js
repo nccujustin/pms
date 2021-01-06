@@ -4,9 +4,64 @@ let app = {
     cart: null, auth: null, provider: null
   }, evts: {},
   cst: {
-    API_HOST: "http://code-server.wuhsun.com:8443/api"
+    API_HOST: "http://code-server.wuhsun.com:8443/api",
+    token: ""
   }
 };
+
+app.getCookie = function (name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
+app.cst.token = app.getCookie('csrftoken');
+
+app.getDate = function (url) {
+  const request = new Request(
+    url,
+    {
+      credentials: 'same-origin',
+      method: 'GET',
+      headers: {
+        "Cache-Control": "no-cache",
+        'X-CSRFToken': app.cst.token,
+        'content-type': 'application/json'
+      }
+    }
+  );
+  return fetch(request)
+    .then(response => response.json())
+}
+
+
+app.postDate = function (url, data) {
+  const request = new Request(
+    url,
+    {
+      body: JSON.stringify(data),
+      credentials: 'same-origin',
+      method: 'POST',
+      headers: {
+        "Cache-Control": "no-cache",
+        'X-CSRFToken': csrftoken,
+        'content-type': 'application/json'
+      }
+    }
+  );
+  return fetch(request)
+    .then(response => response.json())
+}
 
 // core operations
 app.get = function (selector) {
@@ -15,6 +70,17 @@ app.get = function (selector) {
 
 app.getAll = function (selector) {
   return document.querySelectorAll(selector);
+};
+
+app.beforeCreateElement = function (tagName, settings, parentElement) {
+  let obj = document.createElement(tagName);
+  if (settings.atrs) { app.setAttributes(obj, settings.atrs); }
+  if (settings.stys) { app.setStyles(obj, settings.stys); }
+  if (settings.evts) { app.setEventHandlers(obj, settings.evts); }
+  if (parentElement instanceof Element) { parentElement.insertBefore(obj, obj.nextSibling); }
+  // element.parentNode.insertBefore(newElement, element.nextSibling);
+
+  return obj;
 };
 
 app.createElement = function (tagName, settings, parentElement) {

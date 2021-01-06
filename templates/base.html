@@ -6,6 +6,8 @@
   </meta>
   <title>台灣啤酒</title>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  {% load static %}
+  <script src="{% static 'js/lib.js' %}"></script>
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   <style>
     .navbar-c {
@@ -183,7 +185,6 @@
 
   <div class="navbar-c">
     <a href="/">
-      {% load static %}
       <img src="{% static 'images/logo.png' %}" width="150" height="80">
     </a>
     <div class="material">

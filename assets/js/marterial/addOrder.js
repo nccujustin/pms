@@ -1,5 +1,5 @@
-const requestURL = "http://code-server.wuhsun.com:8443"
-const path = "/api/material/order/add/"
+let requestURL = "http://code-server.wuhsun.com:8443"
+let path = "/api/material/order/add"
 
 let supplier = null
 let inputData = []
@@ -25,7 +25,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
-const csrftoken = getCookie('csrftoken');
+csrftoken = app.getCookie('csrftoken');
 
 
 

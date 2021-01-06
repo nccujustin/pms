@@ -1,67 +1,92 @@
-const requestURL = "http://code-server.wuhsun.com:8443"
-const path = "/material/order/list"
+app.state.orderList = null
 
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
+app.init = function () {
 
-const csrftoken = getCookie('csrftoken');
+  app.getOrder();
+};
 
-function getData(url) {
-  const request = new Request(
-    url,
-    {
-      credentials: 'same-origin',
-      method: 'GET',
-      headers: {
-        "Cache-Control": "no-cache",
-        'X-CSRFToken': csrftoken,
-        'content-type': 'application/json'
-      }
-    }
-  );
-  return fetch(request)
-    .then(response => response.json())
-}
-
-async function fetchData() {
+app.getOrder = async function () {
   try {
-    let p = await getData(requestURL + path)
-    console.log('p', p)
+    let p = await app.getDate(app.cst.API_HOST + "/material/order/list")
+    // store to state
+    app.state.orderList = p.data
+    // build totalweight and totalPrice
+    app.mappingData(app.state.orderList)
+    console.log('app.state.orderList', app.state.orderList)
+    app.showOrderList(app.state.orderList)
   } catch (error) {
     console.error("error", error)
   }
 }
 
-fetchData()
+app.mappingData = function (data) {
+  for (let id in data) {
+    let totalPrice = 0
+    let totalWeight = 0
+    for (let i = 0; i < data[id].data.length; i++) {
+      let orderList = data[id].data[i];
+      totalPrice += orderList.price * orderList.weight
+      totalWeight += orderList.weight
+    }
+    data[id].totalPrice = totalPrice
+    data[id].totalWeight = totalWeight
+  }
+}
 
-// app.ajax("post", app.cst.API_HOST + "/user/signin", data, {}, function (req) {
-//   let result = JSON.parse(req.responseText);
-//   if (result.error) {
-//     console.log("fb 登入 failed", result.error);
-//   } else {
-//     console.log("fb 登入成功", result);
-//     app.state.auth = result.data;
-//     app.state.provider = result.data.user.provider;
-//     if (window.location.href.indexOf("profile") > -1) {
-//       // 顯示 Profile 給使用者看
-//       app.initProfile(app.state.auth);
-//     }
-//     app.showMemberIcon(app.state.auth);
-//   }
-// });
-
+app.showOrderList = function (data) {
+  let container = document.getElementById("marterial-order-table-tr");
+  if (!data) {
+    console.log('no data')
+  } else {
+    for (let id in data) {
+      let trContainer = app.createElement("tr", {
+        atrs: { className: "" }
+      }, container);
+      let trC = app.createElement("td", {}, trContainer);
+      app.createElement("input", {
+        atrs: {
+          type: "checkbox",
+          name: "select-" + id,
+        }
+      }, trC);
+      app.createElement("td", {
+        atrs: {
+          textContent: id,
+          value: id
+        }
+      }, trContainer);
+      app.createElement("td", {
+        atrs: {
+          textContent: data[id].supplier,
+          value: data[id].supplier
+        }
+      }, trContainer);
+      app.createElement("td", {
+        atrs: {
+          textContent: "$" + data[id].totalPrice,
+          value: data[id].totalPrice
+        }
+      }, trContainer);
+      app.createElement("td", {
+        atrs: {
+          textContent: data[id].totalWeight,
+          value: data[id].totalWeight
+        }
+      }, trContainer);
+      app.createElement("td", {
+        atrs: {
+          textContent: data[id].orderDate,
+          value: data[id].orderDate
+        }
+      }, trContainer);
+      app.createElement("td", {
+        atrs: {
+          textContent: data[id].purchaseDate,
+          value: data[id].purchaseDate
+        }
+      }, trContainer);
+    }
+  }
+}
 
 window.addEventListener("DOMContentLoaded", app.init);
