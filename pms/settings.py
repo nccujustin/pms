@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+from decouple import config
+
 import environ
 
 
@@ -32,7 +34,7 @@ SECRET_KEY = '_$!)x*+i*r=igr1ynz+na81_2drf_tqvqubxh#n4n-8)z4d6pr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -46,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'welcome',
     'product',
     'store',
     'material',
@@ -89,12 +90,12 @@ WSGI_APPLICATION = 'pms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
-        'USER': 'root',
-        'PASSWORD': 'psJe8jbImJ3Jc1Dk',
-        'HOST': '34.80.81.209',
-        'POST': '3306',
+        'ENGINE': config('ENGINE'),
+        'NAME': config('DBNAME'),
+        'USER': config('DBUSER'),
+        'PASSWORD': config('DBPASSWORD'),
+        'HOST': config('DBHOST'),
+        'PORT': config('DBPORT'),
     }
 }
 
