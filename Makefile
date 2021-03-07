@@ -3,6 +3,8 @@ mv= # migrate version
 v=
 projectName=pms
 image=
+ns=fei
+version=1.0.0
 
 echo:
 	@echo "benn"
@@ -24,9 +26,14 @@ migrations:
 	@python manage.py migrate ${appName} ${mv}
 build-image:
 	@docker build -t ${projectName}:${v} .
+tag-image:
+	@docker tag ${projectName}:${v} 
 run-image:
 	@docker run -idt -p 3000:8000 ${projectName}:${v}
 delete-and-run-image:
 	@make build-image -e v=${v} && docker stop ${image} && make run-image -e v=${v}
+
+helm-install:
+	helm --namespace=$(ns) upgrade --install $(projectName) deployments/charts -f deployments/charts/values.yaml --set image.tag=${version}
 
 .PHONY: echo dev createApp makemigrations migrations

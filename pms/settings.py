@@ -35,6 +35,7 @@ SECRET_KEY = '_$!)x*+i*r=igr1ynz+na81_2drf_tqvqubxh#n4n-8)z4d6pr'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,13 +56,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'pms.urls'
@@ -136,18 +136,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-STATICFILES_DIRS = [
-    ("images", os.path.join(BASE_DIR, 'assets/images')),
-    ("js", os.path.join(BASE_DIR, 'assets/js')),
-    ("css", os.path.join(BASE_DIR, 'assets/css')),
-]
-# print(os.path.join(BASE_DIR, 'assets/js'))
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    ("images", os.path.join(BASE_DIR, 'static/images')),
+    ("js", os.path.join(BASE_DIR, 'static/js')),
+    ("css", os.path.join(BASE_DIR, 'static/css')),
+]
+# print(os.path.join(BASE_DIR, 'assets/js'))
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
